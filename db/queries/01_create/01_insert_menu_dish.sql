@@ -4,4 +4,4 @@ INSERT INTO menu_dishes (
   number_available,
   restaurant_id
 )
-VALUES ('Curry Chicken',10,20,1);
+VALUES ($1 , $2 , $3 , $4);
