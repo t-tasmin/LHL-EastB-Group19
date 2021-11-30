@@ -73,7 +73,6 @@ module.exports = (db) => {
         orderf[i] = order[i]
       }
     }
-    console.log('orderf -->', orderf);
 
     if (Object.keys(orderf).length === 0 ) {
       const templateVars = { 
@@ -92,7 +91,7 @@ module.exports = (db) => {
       }
       if (faulty) {
         const templateVars = { 
-          script: 'Oops! Could not understand your order. Please return to the menu and assign a quantity to each desired and checked dish only. We await you. Thank you!'
+          script: 'Oops! Could not process your order. Please return to the menu and assign a quantity to each desired and checked dish only. We await you. Thank you!'
         }
         res.render('index', templateVars);
       } else {
@@ -100,25 +99,41 @@ module.exports = (db) => {
         for (let i in orderf) {
           orderArray.push(orderf[i]);
         }
-      console.log(orderArray); ///===================
-
-      let order_checkout = [];
-      for (let j of orderArray) {
-        let qstring1 = `SELECT id, name, unit_price FROM menu_dishes
-                        WHERE name = $1;`;
-        let values1 = [j[0]];
-        db.query(qstring1, values1)
+        
+        let order_checkout = [];
+        for (let j of orderArray) {
+          let qstring1 = `SELECT id, name, unit_price FROM menu_dishes
+                          WHERE name = $1;`;
+          let values1 = [j[0]];
+          db.query(qstring1, values1)
           .then((res) => {
             const dish = res.rows;
             order_checkout.push(dish[0]);
           })
-          .catch((err) => {console.log(err.message)});
+          .catch((err) => {console.log(err.message)}); 
+        }
+
+        setTimeout(() => {
           
-      }
-      setTimeout(() => console.log('this order -->', order_checkout), 1000); //----------------------------------///////////////////////
+        console.log('this order=========>',orderArray); ///===================
+        console.log('this checkout========>',order_checkout); ///==================
+
+        let sttl = 0;
+        for (let i = 0; i < orderArray.length; i++) {
+          order_checkout[i]['qtt'] = Number(orderArray[i][1])
+          order_checkout[i]['ttl'] = Number(orderArray[i][1])*order_checkout[i].unit_price;
+          sttl += Number(orderArray[i][1])*order_checkout[i].unit_price;
+        }
+        order_checkout.push({'sttl': sttl, 'tax': '13%', 'gttl': sttl + ((sttl/100)*13)});
+
+        console.log(order_checkout); //=======================
+
+        // const templateVars = {order_checkout}
+        // res.render('index', templateVars);
+      }, 1000); //----------------------------------///////////////////////
 
 
-        res.render('index');
+        
       }
     } 
   });
