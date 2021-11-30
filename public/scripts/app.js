@@ -59,3 +59,13 @@ $.post("/", formValues, function(data){
 
 
 */
+
+// $('#mnenu_form').on('submit', (event) => {
+//   if (!$('#phone').val().length === 0 ) {
+//       event.preventDefault
+//   }
+// })
+
+$(document).on('click', () => {
+  $('#err_msg').slideUp(1000);
+})

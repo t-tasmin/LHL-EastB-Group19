@@ -2,6 +2,8 @@ $primary_color : #BC7869;
 $secondary_color : #F5B57A;
 $price_color : rgb(86, 90, 93);
 body {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   background:  linear-gradient(0deg, $secondary_color, $secondary_color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

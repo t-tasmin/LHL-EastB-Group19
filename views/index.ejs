@@ -4,6 +4,10 @@
 <head>
   <title>Home Page</title>
 
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
@@ -24,8 +28,13 @@
   </header>
 
   <main>
+    <% if (typeof script === 'string') {%>
+      <div id='err_msg'>
+        <%= script %>
+      </div>
+      <% } %>
     <section class="hungry_button">
-      <a class="btn" href="http://localhost:8080/menus"> Feeling Hungry</a>
+      <a class="btn" href="http://localhost:8080/menus"> Feeling Hungry?</a>
     </section>
   </main>
 

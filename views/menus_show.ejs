@@ -4,6 +4,10 @@
 <head>
   <title>Menu Page</title>
 
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
@@ -24,17 +28,34 @@
     </nav>
   </header>
   <main>
+    <% if (typeof script === 'string') {%>
+      <div id='err_msg'>
+        <%= script %>
+      </div>
+      <% } %>
 
-    <p>Choose your Menu:</p>
+    <p>What would you like to have today?</p>
 
     <form action="/menus" method="post">
       <div class="form_layout">
         <div class="menu_items">
-          <% for (let item in menus) { %>
+          <% for (let item of menus) { %>
                 <div class="item">
-                  <label><input type="checkbox" name="itemName" value="<%= menus[item].name %>+<%= menus[item].unit_price %>"> <span class="item_name"> <%= menus[item].name %> </span>  <span class="item_price">$<%= menus[item].unit_price %> </span> </label>
-                  <input type="number" name="numberOfItems" min="1" max="<%= menus[item].number_available %>">
+                  <input id="<%= item.name.split(' ').join('') %>1" type="checkbox" name="<%= item.name %>" value="<%= item.name %>">
+                  <label for="<%= item.name %>"><%= item.id + ' - ' + item.name + "  " + '$' + item.unit_price %></label>
+                  <input id="<%= item.name.split(' ').join('') %>2" type="number" name="<%= item.name %>" min="1" max="<%= item.number_available %>">
                 </div>
+                <script>       
+                  $('#<%= item.name.split(' ').join('') %>2, #<%= item.name.split(' ').join('') %>1').on('click', () => {
+                    if (document.getElementById('<%= item.name.split(' ').join('') %>1').checked) {
+                      $('#<%= item.name.split(' ').join('') %>2').focus();
+                    } else {
+                      $('#<%= item.name.split(' ').join('') %>2').val('');
+                      $('#<%= item.name.split(' ').join('') %>2').blur();;
+                    }           
+                  });
+               </script>
+                
           <% } %>
           </div>
           <button id= "name-form" class="btn" type="submit" >Checkout</button>
