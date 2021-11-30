@@ -14,7 +14,25 @@
 </head>
 
 <body>
+  <% if (typeof script === 'string') {%>
+    <div>
+      <%= script %>
+    </div>
+    <% } %>
+
   <h1>Have fun! 🥔</h1>
+  
+  <form id="menu_form" action="/api/orders" method="POST">
+    <div class="form-inline" class="form-group mb-2">
+      <label for="Rice">Rice</label>
+      <input style= 'margin-left:4em;' class="form-control" type="text" name="Rice" placeholder=0 style="width: 300px; margin: 1em">
+    </div>
+    
+    <div style="display:flex; flex-direction: row; align-items: center; justify-content: center; width: 100%;">
+      <button id="order" type="submit" class="btn btn-primary">order</button>
+    </div>
+  </form>
+
 </body>
 
 </html>
