@@ -5,5 +5,9 @@ $(document).ready(() => {
         console.log(event);
     })
 
+    $(document).on('click', () => {
+        $('#err_msg').slideUp(1000);
+    })
+
 
 });
