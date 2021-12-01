@@ -38,28 +38,35 @@
 
     <section class="final_order">
       <div class="order_reciept">
-        <% for (let item in orders) { %>
+        <% for (let i = 0; i < order_checkout.length - 1; i++) { %>
         <div class="item">
-          <span><%=orders[item].itemName%></span>
-          <span>$<%=orders[item].unitPrice%>*<%=orders[item].numberOfItem%></span>
-          <span>$<%=orders[item].totalPrice%></span>
+          <span><%= order_checkout[i].name %></span>
+          <span>$<%= order_checkout[i].unit_price %>*<%= order_checkout[i].qtt %></span>
+          <span>$<%= order_checkout[i].ttl %></span>
         </div>
         <% } %>
          <div class="total_amount">
           <div class="amount">
-            <span>Sub Total</span> <span> 30</span>
+            <span>Sub Total</span> <span> <%= order_checkout[order_checkout.length - 1].sttl %> </span>
           </div>
           <div class="amount">
-            <span>Tax</span> <span> 13</span>
+            <span>Tax</span> <span> <%= order_checkout[order_checkout.length - 1].tax %> </span>
           </div>
           <div class="amount">
-             <span>Total</span> <span>43</span>
+             <span>Total</span> <span><%= (order_checkout[order_checkout.length - 1].gttl).toFixed(2) %></span>
           </div>
         </div>
       </div>
-      <label>Enter your phone number </label>
-      <input type="tel" placeholder="e.g. 123-234-1234">
-      <button id= "name-form" class="btn" type="submit" >Checkout</button>
+      
+      <form action="/orders" method="post">        
+        <label for="cphone"> Phone </label>
+        <input id='cphone' name="cphone" type="tel" placeholder="Enter your phone number e.g. 123-234-1234">
+        <br>
+        <label for="cname"> Name </label>
+        <input id='cname' name="cname" type="text" placeholder="Enter your name e.g. Jane Doe">
+        <br>
+        <button id= "name-form" class="btn" type="submit" value= '<%= JSON.stringify(order_checkout) %>' name='order' >Order</button>
+      </form>
     </section>
 
   </main>

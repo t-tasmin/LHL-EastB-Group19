@@ -53,6 +53,10 @@ const menuRoutes = require("./routes/menus");
 app.use("/menus", menuRoutes(db));
 //**********************************************************************/
 
+const orderRoutes = require('./routes/orders');
+app.use('/orders', orderRoutes(db));
+
+
 //************************INDEX ROUTE**************************************/
 app.get("/", (req, res) => {
   res.render("index");

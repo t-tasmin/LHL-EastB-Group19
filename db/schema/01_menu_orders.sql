@@ -1,11 +1,3 @@
--- Drop and recreate Users table (Example)
-
--- DROP TABLE IF EXISTS users CASCADE;
--- CREATE TABLE users (
---   id SERIAL PRIMARY KEY NOT NULL,
---   name VARCHAR(255) NOT NULL
--- );
-
 
 DROP DATABASE IF EXISTS midterm;
 
@@ -14,12 +6,14 @@ CREATE DATABASE midterm;
 
 DROP TABLE IF EXISTS menu_dishes CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS queue CASCADE;
 
 CREATE TABLE menu_dishes (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   unit_price INTEGER NOT NULL, -- price in cents
   number_available INTEGER NOT NULL, -- number of dishes available
+  prep_time INTEGER NOT NULL,
   restaurant_id INTEGER -- FK
 );
 
@@ -33,4 +27,12 @@ CREATE TABLE orders (
   start_time TIMESTAMP DEFAULT NOW(),
   end_time TIMESTAMP NOT NULL,
   restaurant_id INTEGER -- FK
+);
+
+CREATE TABLE queue (
+  id SERIAL PRIMARY KEY NOT NULL,
+  customer_phone VARCHAR(255) NOT NULL,
+  customer_name VARCHAR(255) NOT NULL,
+  customer_order VARCHAR(255) NOT NULL,
+  est_pickup_time TIMESTAMP NOT NULL
 );

@@ -69,3 +69,11 @@ $.post("/", formValues, function(data){
 $(document).on('click', () => {
   $('#err_msg').slideUp(1000);
 })
+
+// $('#name-form').on('click', (event) => {
+//   if ($('#phone').val().length === 0) {
+//     event.preventDefault();
+//   } else {
+//     order_checkout.push({'phone': $('#phone').val()});
+//   }
+// })

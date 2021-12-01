@@ -6,3 +6,16 @@ html {
 }
 
 
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+
+footer {
+  display: flex;
+  align-self: floor($number: 0);
+}
